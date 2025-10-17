@@ -1,0 +1,159 @@
+
+<!-- SEKTION: Hoved (Head) -->
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sejlfinnet</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* SEKTION: Font og baggrund */
+    @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap');
+    body {
+      background-image: url('images/Baggrund.png');
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    main {
+      text-align: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0px;
+    }
+
+    /* SEKTION: Tilbage-knap */
+    #leftButtonWrapper {
+      position: fixed;
+      left: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .bubble-arrow {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+      height: 60px;
+      margin-left: 1.5rem;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #b3eaff 70%, #6CC8E1 100%);
+      box-shadow: 0 4px 16px rgba(108,200,225,0.25), 0 1px 4px #285C6E33;
+      border: 2px solid #6CC8E1;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s;
+      position: relative;
+      animation: bubbleWobble 4s infinite ease-in-out;
+      animation-delay: 0.8s;
+    }
+    .bubble-arrow:hover {
+      box-shadow: 0 8px 24px rgba(108,200,225,0.35), 0 2px 8px #285C6E33;
+      transform: scale(1.08);
+    }
+    .bubble-arrow svg {
+      width: 28px;
+      height: 28px;
+      fill: #285C6E;
+    }
+
+    /* SEKTION: Sejlfinnet og taleboble */
+    #sejlfinne img {
+      max-width: 35%;
+      height: auto;
+      margin: 0;
+      animation: swimIn 3s ease-out forwards, floating 3s ease-in-out infinite 3s;
+    }
+    #taleboble {
+      position: relative;
+      margin-left: -300px;
+      margin-top: -160px;
+      opacity: 0;
+      animation: bubbleAppear 1s ease-in forwards 3s;
+    }
+    #taleboble img {
+      max-width: 400px;
+      height: auto;
+      margin: 0;
+      animation: floating 3s ease-in-out infinite 3s;
+    }
+    @keyframes swimIn {
+      0% { transform: translateX(-100vw); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes bubbleAppear {
+      0% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes floating {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+  </style>
+</head>
+
+<!-- SEKTION: Krop (Body) -->
+<body>
+  <!-- Krappe billede -->
+  <img src="images/Krappe.gif" alt="Krappe" style="position: fixed; right: 160px; bottom: 50px; width: 100px; z-index: 50; pointer-events: none;">
+
+  <!-- Lyd (audio) -->
+  <audio id="page-audio" src="soundeffect/sejlfinnetlyd.mp3"></audio>
+
+  <!-- Tilbage-knap -->
+  <div id="leftButtonWrapper">
+    <a href="allefisk.html">
+      <button class="bubble-arrow" aria-label="Tilbage">
+        <svg viewBox="0 0 24 24" style="transform: scaleX(-1)"><path d="M8 5l8 7-8 7"/></svg>
+      </button>
+    </a>
+  </div>
+
+  <!-- Lyd-overlay -->
+  <div id="audio-overlay" style="position:fixed;top:32px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;justify-content:center;">
+    <span style="display:inline-flex;justify-content:center;align-items:center;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #b3eaff 70%, #6CC8E1 100%);box-shadow:0 4px 16px rgba(108,200,225,0.25),0 1px 4px #285C6E33;border:2px solid #6CC8E1;cursor:pointer;transition:box-shadow 0.2s,transform 0.2s;position:relative;font-size:1.1rem;color:#285C6E;font-family:'Cherry Bomb One',cursive;text-align:center;">
+      <span style="position:relative;z-index:2;">🔊</span>
+      <span style="position:absolute;top:110%;left:50%;transform:translateX(-50%);background:#b3eaff;border-radius:16px;padding:6px 18px;font-size:1.1rem;color:#285C6E;box-shadow:0 2px 8px rgba(108,200,225,0.18);border:1.5px solid #6CC8E1;white-space:nowrap;font-family:'Cherry Bomb One',cursive;">Tryk for lyd</span>
+    </span>
+  </div>
+
+  <!-- SEKTION: Scripts -->
+  <script>
+    // Lydafspilning ved klik
+    window.addEventListener('DOMContentLoaded', function() {
+      var overlay = document.getElementById('audio-overlay');
+      var audio = document.getElementById('page-audio');
+      function playAudio() {
+        if (audio) audio.play();
+        if (overlay) overlay.style.display = 'none';
+        window.removeEventListener('click', playAudio);
+        window.removeEventListener('touchstart', playAudio);
+      }
+      window.addEventListener('click', playAudio);
+      window.addEventListener('touchstart', playAudio);
+    });
+  </script>
+
+  <!-- SEKTION: Sejlfinnet og taleboble -->
+  <main>
+    <div id="sejlfinne">
+      <img src="images/Nannasejlfin.png" alt="Sejlfinne">
+    </div>
+    <div id="taleboble">
+      <img src="images/Samlet talboble.png" alt="Taleboble">
+    </div>
+  </main>
+</body>
+</html>

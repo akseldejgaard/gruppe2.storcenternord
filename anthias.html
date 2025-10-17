@@ -1,0 +1,223 @@
+
+<!-- SEKTION: Hoved (Head) -->
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anthias</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* SEKTION: Font og baggrund */
+    @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap');
+    body {
+      background-image: url('images/Baggrund.png');
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* SEKTION: Tilbage-knap */
+    #leftButtonWrapper {
+      position: fixed;
+      left: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .bubble-arrow {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+      height: 60px;
+      margin-left: 1.5rem;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #b3eaff 70%, #6CC8E1 100%);
+      box-shadow: 0 4px 16px rgba(108,200,225,0.25), 0 1px 4px #285C6E33;
+      border: 2px solid #6CC8E1;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s;
+      position: relative;
+      animation: bubbleWobble 4s infinite ease-in-out;
+      animation-delay: 0.8s;
+    }
+    .bubble-arrow:hover {
+      box-shadow: 0 8px 24px rgba(108,200,225,0.35), 0 2px 8px #285C6E33;
+      transform: scale(1.08);
+    }
+    .bubble-arrow svg {
+      width: 28px;
+      height: 28px;
+      fill: #285C6E;
+    }
+
+    /* SEKTION: Bobler og flydefisk */
+    .bubble {
+      position: absolute;
+      left: 0;
+      bottom: -120px;
+      width: 60px;
+      height: auto;
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: 2;
+      transition: none;
+      transform: scaleY(-1);
+      animation: bubbleWobble 4.5s infinite ease-in-out;
+    }
+    @keyframes bubbleWobble {
+      0%   { transform: scaleY(-1) translateX(0); }
+      10%  { transform: scaleY(-1) translateX(-6px); }
+      20%  { transform: scaleY(-1) translateX(6px); }
+      30%  { transform: scaleY(-1) translateX(-8px); }
+      40%  { transform: scaleY(-1) translateX(8px); }
+      50%  { transform: scaleY(-1) translateX(-10px); }
+      60%  { transform: scaleY(-1) translateX(10px); }
+      70%  { transform: scaleY(-1) translateX(-7px); }
+      80%  { transform: scaleY(-1) translateX(7px); }
+      90%  { transform: scaleY(-1) translateX(-3px); }
+      100% { transform: scaleY(-1) translateX(0); }
+    }
+    .float-fish {
+      position: absolute;
+      width: 38px;
+      height: auto;
+      top: 0;
+      left: 100vw;
+      z-index: 4;
+      opacity: 0.85;
+      pointer-events: none;
+      transition: none;
+    }
+  </style>
+</head>
+
+<!-- SEKTION: Krop (Body) -->
+<body>
+  <!-- Krappe billede -->
+  <img src="images/Krappe.gif" alt="Krappe" style="position: fixed; right: 160px; bottom: 50px; width: 100px; z-index: 50; pointer-events: none;">
+
+  <!-- Tilbage-knap -->
+  <div id="leftButtonWrapper">
+    <a href="allefisk.html">
+      <button class="bubble-arrow" aria-label="Tilbage">
+        <svg viewBox="0 0 24 24" style="transform: scaleX(-1)"><path d="M8 5l8 7-8 7"/></svg>
+      </button>
+    </a>
+  </div>
+
+  <!-- Lyd (audio) -->
+  <audio id="page-audio" src="soundeffect/anthiasfishlyd.mp3"></audio>
+
+  <!-- Lyd-overlay -->
+  <div id="audio-overlay" style="position:fixed;top:32px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;align-items:center;justify-content:center;">
+    <span style="display:inline-flex;justify-content:center;align-items:center;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #b3eaff 70%, #6CC8E1 100%);box-shadow:0 4px 16px rgba(108,200,225,0.25),0 1px 4px #285C6E33;border:2px solid #6CC8E1;cursor:pointer;transition:box-shadow 0.2s,transform 0.2s;position:relative;font-size:1.1rem;color:#285C6E;font-family:'Cherry Bomb One',cursive;text-align:center;">
+      <span style="position:relative;z-index:2;">🔊</span>
+      <span style="position:absolute;top:110%;left:50%;transform:translateX(-50%);background:#b3eaff;border-radius:16px;padding:6px 18px;font-size:1.1rem;color:#285C6E;box-shadow:0 2px 8px rgba(108,200,225,0.18);border:1.5px solid #6CC8E1;white-space:nowrap;font-family:'Cherry Bomb One',cursive;">Tryk for lyd</span>
+    </span>
+  </div>
+
+  <!-- SEKTION: Flydefisk og bobler -->
+  <img class="float-fish" id="flydefisk1" src="images/flydefisk01.png" alt="Flydefisk 1">
+  <img class="float-fish" id="flydefisk2" src="images/flydefisk02.png" alt="Flydefisk 2">
+  <img class="float-fish" id="flydefisk3" src="images/flydefisk01.png" alt="Flydefisk 3">
+  <img class="float-fish" id="flydefisk4" src="images/flydefisk02.png" alt="Flydefisk 4">
+  <img class="float-fish" id="flydefisk5" src="images/flydefisk01.png" alt="Flydefisk 5">
+  <img class="float-fish" id="flydefisk6" src="images/flydefisk02.png" alt="Flydefisk 6">
+
+  <!-- SEKTION: Scripts -->
+  <script>
+    // Lydafspilning ved klik
+    window.addEventListener('DOMContentLoaded', function() {
+      var overlay = document.getElementById('audio-overlay');
+      var audio = document.getElementById('page-audio');
+      function playAudio() {
+        if (audio) audio.play();
+        if (overlay) overlay.style.display = 'none';
+        window.removeEventListener('click', playAudio);
+        window.removeEventListener('touchstart', playAudio);
+      }
+      window.addEventListener('click', playAudio);
+      window.addEventListener('touchstart', playAudio);
+    });
+
+    // Bobleanimation
+    function animateBubble(bubble) {
+      const w = document.documentElement.clientWidth;
+      const h = document.documentElement.clientHeight;
+      function floatOnce() {
+        const startX = Math.random() * (w - 60);
+        const duration = 7000 + Math.random() * 7000;
+        const scale = 0.7 + Math.random() * 0.6;
+        const amplitude = 30 + Math.random() * 30;
+        const frequency = 1.5 + Math.random();
+        const phase = Math.random() * Math.PI * 2;
+        bubble.style.left = startX + 'px';
+        bubble.style.bottom = '-120px';
+        bubble.style.opacity = 0.7;
+        bubble.style.transform = `scaleY(-1) scale(${scale})`;
+        bubble.style.transition = 'none';
+        let startTime = null;
+        function animateStep(ts) {
+          if (!startTime) startTime = ts;
+          let elapsed = ts - startTime;
+          let progress = Math.min(elapsed / duration, 1);
+          let y = -120 + (h + 240) * progress;
+          let x = startX + Math.sin(progress * Math.PI * 2 * frequency + phase) * amplitude;
+          bubble.style.left = x + 'px';
+          bubble.style.bottom = y + 'px';
+          if (progress < 1) {
+            requestAnimationFrame(animateStep);
+          } else {
+            setTimeout(floatOnce, 2500);
+          }
+        }
+        requestAnimationFrame(animateStep);
+      }
+      floatOnce();
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      for (let i = 0; i < 7; i++) {
+        const b = document.createElement('img');
+        b.src = 'images/floatbobbler.png';
+        b.className = 'bubble';
+        b.alt = 'Bobler';
+        document.body.appendChild(b);
+        setTimeout(() => animateBubble(b), i * 2200 + Math.random()*1200);
+      }
+    });
+
+    // Flydefisk animation
+    function animateFloatFish(fish) {
+      const w = document.documentElement.clientWidth;
+      const h = document.documentElement.clientHeight;
+      function floatOnce() {
+        const startY = Math.random() * (h - 40);
+        const duration = 18000 + Math.random() * 12000;
+        fish.style.top = startY + 'px';
+        fish.style.left = w + 'px';
+        fish.style.transition = 'none';
+        void fish.offsetWidth;
+        setTimeout(() => {
+          fish.style.transition = `left ${duration}ms linear`;
+          fish.style.left = '-60px';
+        }, 20);
+        setTimeout(floatOnce, duration + 4000);
+      }
+      floatOnce();
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      for (let i = 1; i <= 6; i++) {
+        setTimeout(() => animateFloatFish(document.getElementById('flydefisk' + i)), i * 3000);
+      }
+    });
+  </script>
+</body>
+</html>

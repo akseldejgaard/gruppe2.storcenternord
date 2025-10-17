@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>start</title>
+
+        <link rel="stylesheet" href="css/style.css">
+
+        <style>
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap');
+
+@keyframes floatOutRight {
+  to {
+    transform: translateX(120vw);
+    opacity: 0;
+  }
+}
+.header-flex.float-out {
+  animation: floatOutRight 1s cubic-bezier(.68,-0.55,.27,1.55) forwards;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var arrowBtn = document.querySelector('.bubble-arrow');
+  var headerFlex = document.querySelector('.header-flex');
+  if (arrowBtn && headerFlex) {
+    arrowBtn.addEventListener('click', function(e) {
+      headerFlex.classList.add('float-out');
+      // Forsinker navigeringen for at matche animationens varighed
+      setTimeout(function() {
+        window.location.href = 'havfrue.html';
+      }, 900);
+      e.preventDefault();
+    });
+  }
+});
+</script>
+</head>
+<body style="background-image: url('images/Baggrund.png'); background-size: cover;">
+  <img src="images/Krappe.gif" alt="Krappe" style="position: fixed; right: 160px; bottom: 50px; width: 100px; z-index: 50; pointer-events: none;">
+
+  <!-- Baggrundsmusik -->
+  <audio id="background-audio" src="soundeffect/baggrundsmusik.mp3" autoplay loop></audio>
+
+    <div class="header-flex">
+      <h1>Velkommen til akvariet</h1>
+      <a href="havfrue.html">
+        <button class="bubble-arrow" aria-label="Next">
+          <svg viewBox="0 0 24 24"><path d="M8 5l8 7-8 7"/></svg>
+        </button>
+      </a>
+    </div>
+ 
+   
+</body>
+</html>

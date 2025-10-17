@@ -1,0 +1,183 @@
+@keyframes bubbleWobble {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-60px); }
+  100% { transform: translateY(0); }
+}
+@keyframes wave1 {
+  0% { background-position-x: 0, 0, 0, 0; }
+  100% { background-position-x: 0, 0, 100vw, 0; }
+}
+@keyframes wave2 {
+  0% { background-position-x: 0, 0, 0, 0; }
+  100% { background-position-x: 0, 0, 0, 100vw; }
+}
+@keyframes floatInLeft {
+  0% {
+    left: -200px;
+    opacity: 0;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    left: 50%;
+    opacity: 1;
+  }
+}
+
+/* Remove preexisting body size settings */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Center the h1 element */
+body {  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+    background-color: #b3eaff;
+    background-image:
+    linear-gradient(to bottom, #b3eaff 0%, #6CC8E1 30%, #4fc3e8 60%, #3fa7c9 80%, #285C6E 100%), /* lighter underwater gradient */
+    url("images/boelge01.png"), /* bølge 1 */
+    url("images/boelge02.png"), /* bølge 2 */
+    url("images/Baggrund.png"); /* sand */
+  background-position:
+    top,           /* gradient */
+    top,           /* bølge 1 */
+    top,           /* bølge 2 */
+    bottom;        /* sand */
+  background-size:
+    100vw 100vh,   /* gradient */
+    100vw 120px,   /* bølge 1 */
+    100vw 80px,    /* bølge 2 */
+    100% auto;     /* sand */
+  background-repeat:
+    no-repeat,     /* gradient */
+    no-repeat,     /* bølge 1 */
+    no-repeat,     /* bølge 2 */
+    no-repeat;     /* sand */
+  background-attachment:
+    fixed,         /* gradient */
+    fixed,         /* bølge 1 */
+    fixed,         /* bølge 2 */
+    fixed;         /* sand */
+  /* Animate bølge 1 and 2 for wave effect */
+  animation: wave1 12s linear infinite, wave2 18s linear infinite;
+}
+
+/*Load nye fonts*/
+.cherry-bomb-one-regular {
+  font-family: "Cherry Bomb One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1{
+  font-size: 50px;
+  color: #142A39;
+  font-family: 'Cherry Bomb One', sans-serif;
+  animation: bubbleWobble 4s infinite ease-in-out;
+  margin: 0;
+  position: static;
+  left: auto;
+  transform: none;
+}
+
+p{
+    font-size: 20px;
+    color: #142A39;
+    font-family: 'Cherry Bomb One', sans-serif;
+    margin: 0;
+    position: static;
+    left: auto;
+    transform: none;
+}
+
+/* Bubble arrow button styles */
+.bubble-arrow {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  margin-left: 1.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #b3eaff 70%, #6CC8E1 100%);
+  box-shadow: 0 4px 16px rgba(108,200,225,0.25), 0 1px 4px #285C6E33;
+  border: 2px solid #6CC8E1;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+  animation: bubbleWobble 4s infinite ease-in-out;
+  animation-delay: 0.8s;
+}
+.bubble-arrow:hover {
+  box-shadow: 0 8px 24px rgba(108,200,225,0.35), 0 2px 8px #285C6E33;
+  transform: scale(1.08);
+}
+.bubble-arrow svg {
+  width: 28px;
+  height: 28px;
+  fill: #285C6E;
+}
+
+#havfruetale {
+  position: absolute;
+  left: 30%;
+  top: 20%;
+  min-width: 120px;
+  max-width: 220px;
+  background: #fff;
+  color: #285C6E;
+  border-radius: 32px;
+  padding: 24px 28px 24px 28px;
+  font-family: 'Cherry Bomb One', sans-serif;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 16px rgba(108,200,225,0.18);
+  z-index: 20;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#havfruetale:after {
+  content: '';
+  position: absolute;
+  right: 18px;
+  bottom: -18px;
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  border-top: 18px solid #fff;
+  filter: drop-shadow(0 2px 2px #b3eaff);
+}
+#havfruetale p {
+  background: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Flex container for h1 and arrow */
+.header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#havfrue {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 150px;
+  height: auto;
+  z-index: 3;
+  animation: floatInLeft 1.8s cubic-bezier(.68,-0.55,.27,1.55) 0s 1, bubbleWobble 4s infinite ease-in-out 1.8s;
+  opacity: 1;
+}
